@@ -1,0 +1,22 @@
+<p>
+  stocklist works!
+</p>
+
+<table *ngIf="stocklist">
+  <thead>
+  <tr>
+    <th>symbol</th>
+    <th>lastprice</th>
+    <th>change</th>
+    <th>changepercentage</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let eachstock of stocklist; let i=index">
+    <td>{{eachstock.StockName}}</td>
+    <td>{{eachstock.StockPrice}}</td>
+    <td>{{eachstock.StockDifference}}</td>
+    <td>{{eachstock.StockDifferencePercentage}}</td>
+  </tr>
+  </tbody>
+</table>
