@@ -1,0 +1,14 @@
+<table class="table table-hover" *ngIf="order">
+  <thead>
+  <tr>
+    <th>StockName</th>
+    <th>StockQuantity</th>    
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let eachstock of order; let i=index">
+    <td>{{eachstock.StockName}}</td>    
+    <td>{{eachstock.StockQuantity}}</td>    
+  </tr>
+  </tbody>
+</table>
