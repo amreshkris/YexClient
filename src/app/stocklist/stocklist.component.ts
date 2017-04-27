@@ -42,26 +42,10 @@ export class StocklistComponent implements OnInit {
   }
 
   // poll in interval of 5s and start subscription array
-  pollStockList(closeModelClicks) {
-    //this.closedModal = closeModelClicks;
-    this.subscription[closeModelClicks] = this.newPollStockList().subscribe(data =>
-      // this.stocklist = data
-      this.stocklist = data
-    );
-  }
-
-  getColor(stock){
-    var color = stock.StockDifference < 0 ? "red" : "green";
-    return color;
-  }    
-
-
-  newPollStockList() {
-    return Observable.interval(5000).switchMap(() => this.http.get('http://localhost:22793/api/stock/fluctuate')).
-      map(res => {
-        return res.json();
-      }).catch(error => Observable.throw(error.json()))
-    
+  pollStockList(closeModelClicks) {    
+    this.subscription[closeModelClicks] = this.searchService.newPollStockList().subscribe(
+      data => {this.stocklist = data},
+      error => {console.log("Error in polling stock list"+ error)})    
   }
 
   // event receiver to start ticking 
@@ -72,14 +56,6 @@ export class StocklistComponent implements OnInit {
   //event receiver to unsubscribe on modal open
   onModalShow(openModal: number) {
     this.subscription[openModal].unsubscribe();
-  }
-
-  getStockColor(stock){
-    
-    var color = stock.StockDifference < 0 ? "red" : "green";
-    console.log("color is " + color)
-    return color;
-    
   }
 }
 

@@ -18,6 +18,6 @@ export class OrderComponent implements OnInit {
   getOrderHistory(){    
     this.searchService.loadOrder().subscribe(data =>{
         this.order = data;         
-    });    
+    },error => console.log("Error in fetching ordee history"+ error));    
   }
 }

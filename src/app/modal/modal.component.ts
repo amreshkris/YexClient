@@ -51,11 +51,11 @@ export class ModalComponent implements OnInit {
     if ((stock.StockPrice * numberOfQuantity) < SearchService.TotalAmountInWallet.amount) {
       this.insufficientFunds = false;
       this.searchService.saveOrder(new OrderDetailObject(stock.StockName, numberOfQuantity)).subscribe(data => {
-        //this.orderHistory = data;
-        SearchService.TotalAmountInWallet.amount -= stock.StockPrice * numberOfQuantity;
-      });
-      this.lgModal.hide();
-      this.router.navigateByUrl('/order');
+          SearchService.TotalAmountInWallet.amount -= stock.StockPrice * numberOfQuantity;
+          this.lgModal.hide();
+          this.router.navigateByUrl('/order');
+      },error => {console.log("Error in save order" + error)});
+      
     }
     else {
       this.insufficientFunds = true;

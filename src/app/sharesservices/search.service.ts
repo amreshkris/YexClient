@@ -8,16 +8,25 @@ export class SearchService {
   static ModalClicks: number = 0;
   static TotalAmountInWallet : Wallet = { amount : 10000 }; 
   public orderHistory: Array<OrderDetailObject>;
+  static readonly serverBaseUrl : string = "http://localhost:22793/";
 
   constructor(private http: Http) { }
 
   getAllStock() {
     console.log('service call');
-    return this.http.post('http://localhost:22793/api/load/10', '').map(res => {
+    return this.http.post(SearchService.serverBaseUrl+'api/load/10', '').map(res => {
       {
         return res.json();
       }
     }).catch(error => Observable.throw(error.json()))
+  }
+
+  newPollStockList() {
+    return Observable.interval(5000).switchMap(() => this.http.get(SearchService.serverBaseUrl+'api/stock/fluctuate')).
+      map(res => {
+        return res.json();
+      }).catch(error => Observable.throw(error.json()))
+    
   }
 
   saveOrder(orderDetail){
@@ -25,9 +34,8 @@ export class SearchService {
       let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
       let options = new RequestOptions({ headers: headers });
       console.log('service call' + bodyString);
-      return this.http.post('http://localhost:22793/api/order',bodyString,options).map(res => {
-      {
-        this.orderHistory = res.json();
+      return this.http.post(SearchService.serverBaseUrl+'api/order',bodyString,options).map(res => {
+      {        
         return res.json();
       }
     }).catch(error => Observable.throw(error.json()))
@@ -35,7 +43,7 @@ export class SearchService {
 
   loadOrder(){
      console.log('service call to fetch order history');
-     return this.http.get('http://localhost:22793/api/order').map(res => {
+     return this.http.get(SearchService.serverBaseUrl+'api/order').map(res => {
       {
         // this.orderHistory = res.json();
         console.log('From Service' + JSON.stringify(res));
