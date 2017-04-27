@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { SearchService } from './sharesservices/search.service'
+import { SearchService, Wallet } from './sharesservices/search.service'
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,5 +8,9 @@ import { SearchService } from './sharesservices/search.service'
   viewProviders: [SearchService]
 })
 export class AppComponent {
-  title = 'app works!';
+  title = '';
+  walletAmount: Wallet;
+  constructor(private searchService : SearchService){
+    this.walletAmount = SearchService.TotalAmountInWallet;
+  }
 }

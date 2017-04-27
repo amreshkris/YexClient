@@ -1,12 +1,9 @@
-<p>
-  stocklist works!
-</p>
-
-<table *ngIf="stocklist">
+<table class="table table-hover table-responsive" *ngIf="stocklist">
   <thead>
   <tr>
     <th>symbol</th>
     <th>lastprice</th>
+    <th>currentprice</th>
     <th>change</th>
     <th>changepercentage</th>
   </tr>
@@ -14,9 +11,12 @@
   <tbody>
   <tr *ngFor="let eachstock of stocklist; let i=index">
     <td>{{eachstock.StockName}}</td>
-    <td>{{eachstock.StockPrice}}</td>
-    <td>{{eachstock.StockDifference}}</td>
-    <td>{{eachstock.StockDifferencePercentage}}</td>
+    <td>{{eachstock.PreviousStockPrice}}</td>
+    <td [ngClass]="{true : 'redfont', false : 'greenfont'}[eachstock.StockDifference < 0]">{{eachstock.StockPrice}}</td>
+    <td [ngClass]="{true : 'redfont', false : 'greenfont'}[eachstock.StockDifference < 0]">{{eachstock.StockDifference}}</td>
+    <td [ngClass]="{true : 'redfont', false : 'greenfont'}[eachstock.StockDifference < 0]">{{eachstock.StockDifferencePercentage}}</td>
+    <!--<button type="button" class="btn btn-primary" (click)="selectRow(eachstock)">Buy</button>-->
+    <app-modal [stock]='stocklist[i]' (onClose)='onModalClose($event)' (onShow)='onModalShow($event)'></app-modal>
   </tr>
   </tbody>
 </table>

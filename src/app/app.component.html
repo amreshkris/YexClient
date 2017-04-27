@@ -1,5 +1,16 @@
-<h1>
-  {{title}}
-  <!--<app-stocklist></app-stocklist>-->
-</h1>
+<nav role="navigation" class="navbar navbar-default">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <a href="#" class="navbar-brand">Brand</a>
+        </div>
+            <ul class="nav navbar-nav">
+                <li><a routerLink="stocklist" routerLinkActive="active">Home</a></li>
+                <li><a routerLink="order" routerLinkActive="active">My Orders</a></li>                
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a><span>My Amount:</span></a></li>
+                <li><a style="padding-right:100px;">{{ walletAmount.amount | currency:'EUR':true}}</a></li>               
+            </ul>
+</nav>
+
 <router-outlet></router-outlet>

@@ -1,17 +1,37 @@
-<div bsModal #lgModal="bs-modal"  class="modal fade" role="dialog" aria-hidden="true" id="mdl">
+<div bsModal #lgModal="bs-modal"  class="modal fade"  role="dialog" aria-hidden="true" id="mdl">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title pull-left">Large modal</h4>
-        <button type="button" class="close pull-right" (click)="lgModal.hide()" aria-label="Close">
-          <div> the stock name is {{stock.StockName}}</div>
+        <h4 class="modal-title pull-left">YEX Purchase Manager</h4>
+        <button type="button" class="close pull-right" (click)="closeModal()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-         <div> the stock name is {{stock.StockName}}</div>
+        <div class="container">
+          <form [formGroup]="stockForm">
+              <div class="form-group">
+                <label for="stockqty">Stock Name :</label>
+                <label for="name"><h2>{{stock.StockName}}</h2></label>
+                <br/>
+                <label for="stockqty">Stock Price:</label>
+                <label for="Price"><h2>{{stock.StockPrice}}</h2></label>
+              </div>
+              <div class="form-group">
+                <label for="stockqty">Number of Stocks</label>
+                <input #qty type="number" style="width:200px;" required class="form-control" id="stockqty" [formControl]="stockForm.controls['qty']">
+                <br/>
+                <div style="width:200px;" *ngIf="stockForm.controls['qty'].hasError('required') && stockForm.controls['qty'].touched" class="alert alert-danger">You must add a quantity.</div>
+                <div style="width:200px;" *ngIf="insufficientFunds" class="alert alert-danger">Sorry, Do not have suffcient funds to buy</div>
+               </div>
+               <button type="submit" class="btn btn-success" (click)="buyStock(stock,qty.value)" [disabled]="!stockForm.valid">Buy</button>
+               <button type="submit" class="btn btn-danger" (click)="closeModal()">Close</button>
+          </form>
+        </div>        
       </div>
     </div>
   </div>
 </div>
 
- <button type="button" class="btn btn-primary" (click)="selectRow(eachstock)" data-toggle="modal" data-target="#mdl">Buy</button>
+<button type="button" class="btn btn-primary" data-backdrop="static" data-keyboard="false" (click)="showModal(eachstock)" data-toggle="modal" data-target="#mdl">Buy</button>
+
