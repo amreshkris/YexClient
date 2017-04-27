@@ -6,8 +6,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 1) Node version > 6.9.0
    To Download latest version [https://nodejs.org/en/](https://nodejs.org/en/)
-2) npm install - To install project dependencies
-3) ng serve - To run the application , Navigate to `http://localhost:4200/`
+2) From project directory - npm install - To install project dependencies
+3) From project directory - ng serve - To run the application , Navigate to `http://localhost:4200/`. 
 
 ## Development server
 
