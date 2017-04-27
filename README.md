@@ -2,7 +2,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
 
-## Prerequistes
+## Prerequisites
 
 1) Node version > 6.9.0
    To Download latest version [https://nodejs.org/en/](https://nodejs.org/en/)
